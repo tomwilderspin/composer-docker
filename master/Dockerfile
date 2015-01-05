@@ -24,6 +24,9 @@ ENV COMPOSER_HOME /root/composer
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+# Increase php max memory to 1024M
+RUN sed -i 's/memory_limit = .*/memory_limit = '1024M'/' /etc/php5/cli/php.ini
+
 # Display version information
 RUN php --version
 RUN composer --version
