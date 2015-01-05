@@ -18,14 +18,14 @@ RUN php5enmod curl json mysql mysqli pdo_mysql pdo_sqlite readline gd mcrypt pdo
 RUN pecl install zip
 RUN echo "extension=zip.so" > /usr/local/etc/php/conf.d/extension-zip.ini
 
+# Increase php memory limit to 1024M
+RUN echo "memory_limit=1024M" > /usr/local/etc/php/conf.d/memory-limit.ini
+
 # Set environmental variables
 ENV COMPOSER_HOME /root/composer
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
-# Increase php max memory to 1024M
-RUN sed -i 's/memory_limit = .*/memory_limit = '1024M'/' /etc/php5/cli/php.ini
 
 # Display version information
 RUN php --version
